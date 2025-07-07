@@ -27,7 +27,6 @@ def paint_map(screen,map):
     l = len(map[0]) # довжина
     # print("h = ",h)
     # print("l = ",l)
-    screen.fill(pygame.Color("green"))
     for iL in range(0,l):
         for iH in range(0,h):
             pygame.draw.rect(screen, ((255,255,255)), (X+int(stor*iL), Y+int(stor*iH), stor, stor))
@@ -53,7 +52,8 @@ def move(data,dx,dy):
         active["x"] = data["x"]+dx
     if (active["x"] >= 1) and dx < 0:
         active["x"] = data["x"] + dx
-    active["y"] = int(data["y"])+dy
+    if int(data["y"]) + len(shape) != H:
+        active["y"] = int(data["y"])+dy
 
 def spawn_pies() -> dict:
     global L
@@ -68,6 +68,12 @@ def spawn_pies() -> dict:
         'y' : "0"
     }
     return base   
+
+def route(data):
+    global active
+    rotations_count = SHAPES[data["name"]]["rotations_count"]
+    rotation = active["rotation"]+1
+    active["rotation"] = rotation%rotations_count
 
 if __name__ == "__main__":
     stor = 20
@@ -99,7 +105,6 @@ if __name__ == "__main__":
     active = spawn_pies()
     print(active)
     
-    move(active,-1,1)
     
     while True:
         for event in pygame.event.get():
@@ -119,9 +124,13 @@ if __name__ == "__main__":
                     print("3")
                     move(active,0,1)
                 elif keboard == pygame.K_UP:
-                    active["rotation"] = (active["rotation"]+1)%4
+                    route(active)
+        pygame.time.set_timer(move(active,0,1), 100) 
         paint_map(screen,map)
         paint_shape(SHAPES[active["name"]]["patterns"][active["rotation"]],SHAPES[sprite]["color"],active["x"],active["y"])
         pygame.display.flip()
-        screen.fill(pygame.Color("green"))
-        sleep(0.1)
+        # screen.fill(pygame.Color("green"))
+        surface_width = L * stor
+        surface_height = H * stor
+        surface = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
+    
