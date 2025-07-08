@@ -14,10 +14,10 @@ def generait_map(h,l)->None: # створити карту
         map.append(rou)
 
 def set_color(x,y,color)->None: # встановити колік за кордінат (x,y)
-    map[x][y] = color
+    map[y][x] = color
 
-def get_color(x,y)->None: # отримат колік за кордінат (x,y)
-    return map[x-1][y-1]
+def get_color(x,y)->int: # отримат колік за кордінат (x,y)
+    return map[y-1][x-1]
 
 if __name__ == "__main__":
     h = int(input("h = ")) # висота 
