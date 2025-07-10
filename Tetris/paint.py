@@ -51,15 +51,25 @@ def color_to_number(color)->list:
         number = 0
     return number
 
+# 0 0 0 0 
+# 0 2 0 0
+# 1 2 2 2
+
+
 def paint_map(screen,map):
     global X,Y,stor
+    # print(type(map))
     h = len(map)    # висота 
     l = len(map[0]) # довжина
     # print("h = ",h)
     # print("l = ",l)
     for iL in range(0,l):
         for iH in range(0,h):
-            into, out = number_to_color(map[iH][iL])
+            try:
+                into, out = number_to_color(map[iH][iL])
+            except IndexError:
+                print(f"iH = {iH}")
+                print(f"iL = {iL}")
             pygame.draw.rect(screen, (out), (X+int(stor*iL), Y+int(stor*iH), stor, stor))
             pygame.draw.rect(screen, (into), (X+int(stor*iL)+1, Y+int(stor*iH)+1, stor-2, stor-2))
 
@@ -85,6 +95,7 @@ def move(data,dx,dy):
 
 def spawn_pies() -> dict:
     global L
+    # name = "I"
     name = random.choice(list(SHAPES.keys()))
     SHAPES_data = SHAPES[name]
     x = L // 2 - len(SHAPES_data['patterns'][0][0]) // 2
@@ -140,38 +151,11 @@ def route(data)->dict:
     active_new = data.copy()
     active_new["rotation"] = rotation%rotations_count
     if Is_corect(active_new):
-        print(True)
+        # print(True)
         return active_new
     else:
-        print(False)
+        # print(False)
         return data
-
-
-# def is_valid_position(tetromino: dict) -> bool:
-#     shape = SHAPES[tetromino['name']]['patterns'][tetromino['rotation']]
-#     for y, row in enumerate(shape):
-#         for x, cell in enumerate(row):
-#             if cell:
-#                 grid_x = tetromino['x'] + x
-#                 grid_y = int(tetromino['y']) + y
-#                 if grid_x < 0 or grid_x >= L or grid_y >= H:
-#                     return False
-#                 if grid_y >= 0 and get_color(grid_x, grid_y) != 0:
-#                     return False
-#     return True
-
-# def is_valid_position(tetromino: dict) -> bool:
-#     shape_pattern = SHAPES[tetromino['name']]['patterns'][tetromino['rotation']]
-#     for row_index, row in enumerate(shape_pattern):
-#         for col_index, cell in enumerate(row):
-#             if cell != 0:
-#                 x = tetromino['x'] + col_index
-#                 y = int(tetromino['y']) + row_index
-#                 if not (0 <= x < L and 0 <= y < H):
-#                     return False
-#                 if get_color(x, y) != 0:
-#                     return False
-#     return True
 
 def is_valid_position(tetromino: dict) -> bool: 
     shape_pattern = SHAPES[tetromino['name']]['patterns'][tetromino['rotation']] 
@@ -182,15 +166,59 @@ def is_valid_position(tetromino: dict) -> bool:
                 y = int(tetromino['y'])
                 grid_x = x + col_index 
                 grid_y = y + row_index 
-                y_dow = y + len(shape_pattern) - 1
                 if not (0 <= grid_x < L and 0 <= grid_y < H): 
                     return False
-                if y_dow >= H:
-                    return False
-                if map[y_dow][grid_x] != 0:
+                if map[grid_y][grid_x] != 0:
+                    # print(False)
                     return False
     return True
 
+def clearn_bonus():
+    global bouns
+    try:
+        bonus += 1
+        bonus -= 1
+    except:
+        bonus = 0
+    map_now = map.copy()
+    for number, row in enumerate(map_now):
+        next_row = [0 for _ in range(0,len(row))]
+        if 0 not in row:
+           map_now[number] = next_row
+           print(row not in map_now)
+           bonus += 1
+           print(bonus)
+    for rous in range(0,len(map_now)):
+        print(map[rous])
+    print(len(map_now))
+    return map_now
+    # map = map_new.copy()
+
+
+def clear_lines(): 
+    """ Перевіряє сітку на наявність заповнених рядків, видаляє їх і зсуває верхні рядки вниз. Повертає кількість очищених рядків для нарахування очок. """ 
+    lines_cleared = 0 
+    # Ітеруємо знизу вгору, щоб індекси не збивалися при видаленні 
+    map_new = map.copy()
+    y = H - 1 
+    while y >= 0: 
+        row = map_new[y] 
+    # Якщо в рядку немає порожніх клітинок (None) 
+        clear = True
+        for cell in row:
+            # type: ignore
+            if cell == 0:
+                clear =False
+        if clear:
+            lines_cleared += 1 
+            # Видаляємо заповнений рядок 
+            map_new.pop(y) 
+            # # Додаємо новий порожній рядок нагорі, щоб зберегти висоту поля 
+            map_new.insert(0, [0 for _ in range(L)]) 
+        else: 
+        # # Якщо рядок не заповнений, переходимо до перевірки наступного (вище) 
+            y -= 1 
+        return map_new, lines_cleared
 
 def pin(tetromino: dict):
     shape_pattern = SHAPES[tetromino['name']]['patterns'][tetromino['rotation']]
@@ -238,10 +266,13 @@ if __name__ == "__main__":
     active = spawn_pies()
     print(active)
     
+    bonus = 0
+    
     active_new = active.copy()
     clock = pygame.time.Clock()
     DROP_EVENT = pygame.USEREVENT+1
     pygame.time.set_timer(DROP_EVENT,1000)
+    game_over = False
     while True:
         sprite = active["name"]
         for event in pygame.event.get():
@@ -249,16 +280,18 @@ if __name__ == "__main__":
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == DROP_EVENT:
+            elif event.type == DROP_EVENT and not game_over:
                 active_new = move(active,0,1)
                 if is_valid_position(active_new):
                     active = active_new
                 else:
                     pin(active)
-                    if active_new["y"] == SHAPES[active_new["name"]]["patterns"][active["rotation"]]:
-                        print
                     active = spawn_pies()
-            elif keboard == pygame.KEYDOWN:
+                    if not is_valid_position(active):
+                        game_over = True
+                map, lines_cleared = clear_lines()
+                bonus += lines_cleared
+            elif keboard == pygame.KEYDOWN and not game_over:
                 keboard = event.key
                 if keboard == pygame.K_LEFT:
                     active_new = move(active,-1,0)
@@ -275,11 +308,13 @@ if __name__ == "__main__":
                 elif keboard == pygame.K_UP:
                     active = route(active)
         # pygame.time.set_timer(move(active,0,1), 100) 
-        paint_map(screen,map)
-        paint_shape(SHAPES[active["name"]]["patterns"][active["rotation"]],SHAPES[sprite]["color"],active["x"],active["y"])
-        pygame.display.flip()
-        # screen.fill(pygame.Color("green"))
-        surface_width = L * stor
-        surface_height = H * stor
-        surface = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
-    
+        if not game_over:
+            paint_map(screen,map)
+            paint_shape(SHAPES[active["name"]]["patterns"][active["rotation"]],SHAPES[sprite]["color"],active["x"],active["y"])
+            pygame.display.flip()
+            # screen.fill(pygame.Color("green"))
+            surface_width = L * stor
+            surface_height = H * stor
+            surface = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
+        else:
+            print(f"bonus {bonus}")
