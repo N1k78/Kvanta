@@ -9,7 +9,7 @@ This is my version of code.
 To start the "Tetris game" look down:
 Chose Os and where you gone run game:
 - [🐧 Linux](#-linux)
-    - [🐟 fish shell](#-bash-shell)
+    - [🐟 fish shell](#-fish-shell)
     - [🐚 bash shell](#-bash-shell)
 - [💻 Ubuntu](#-ubuntu)
     - [🐟 fish-shell](#-fish-shell-1)
