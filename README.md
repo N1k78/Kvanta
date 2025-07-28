@@ -6,25 +6,36 @@ The project and exsesize is in this presentation:
 
 This is my version of code.
 
+**If you not work with `python` look here**
+- [🐧 Linux](#-linux-python)
+- [💻 Ubuntu](#-ubuntu-python)
+- [🪟 Windows](#-windows-python)
+- [🍎 Macos](#-macos-python)
+
+
 To start the "Tetris game" look down:
 Chose Os and where you gone run game:
 - [🐧 Linux](#-linux)
     - [🐟 fish shell](#-fish-shell)
     - [🐚 bash shell](#-bash-shell)
 - [💻 Ubuntu](#-ubuntu)
-    - [🐟 fish-shell](#-fish-shell-1)
-    - [🐚 bash shell](#-bash-shell-1)
+    - [🐟 fish-shell](#-fish-shell)
+    - [🐚 bash shell](#-bash-shell)
 - [🪟 Windows](#-windows)
     - [Cmd](#cmd)
     - [PowerShell](#powershell)
 - [🍎 Macos](#-macos)
-    - [🐟 fish-shell](#-fish-shell-2)
-    - [🐚 bash shell](#-bash-shell-2)
+    - [🐟 fish-shell](#-fish-shell)
+    - [🐚 bash shell](#-bash-shell)
 
-## 🐧 Linux
+## 🐧 Linux, 💻 Ubuntu, 🍎 macOS
 
 1. Press 
-<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>
+    - 🐧 Linux and 💻 Ubuntu
+        - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>
+    - 🍎 macOS
+        - <kbd>Cmd</kbd> + <kbd>Space</kbd> → wright `Terminal` → <kbd>Enter</kbd>
+
 
 ### 🐟 Fish shell
 2. Clone the repository:
@@ -55,6 +66,9 @@ Chose Os and where you gone run game:
     ```bash
     python3 paint.py
     ```
+
+[Go to the start](#kvanta)
+
 ### 🐚 Bash shell
 
 2. Clone the repository:
@@ -86,71 +100,7 @@ Chose Os and where you gone run game:
     python3 paint.py
     ```
 
-
-## 💻 Ubuntu
-
-1. Press 
-<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>
-
-### 🐟 Fish shell
-2. Clone the repository:
-    ```bash
-    git clone https://github.com/N1k78/Kvanta.git
-    ```
-3. go to the folder Kvanta:
-    ```bash
-    cd Kvanta
-    ```
-4. Create a virtual environment:
-    ```bash
-    python3 -m venv .Kvanta
-    ```
-5. Activate environment:
-    ```bash
-    source .Kvanta/bin/activate.fish
-    ```
-6. Install packages:
-    ```bash
-    pip3 install -r requirements.txt
-    ```
-7. Enter the Tetris directory:
-    ```bash
-    cd Tetris
-    ```
-8. Run the game:
-    ```bash
-    python3 paint.py
-    ```
-### 🐚 Bash shell
-
-2. Clone the repository:
-    ```bash
-    git clone https://github.com/N1k78/Kvanta.git
-    ```
-3. Go to the Kvanta folder:
-    ```bash
-    cd Kvanta
-    ```
-4. Create a virtual environment:
-    ```bash
-    python3 -m venv .Kvanta
-    ```
-5. Activate environment:
-    ```bash
-    source .Kvanta/bin/activate
-    ```
-6. Install packages:
-    ```bash
-    pip3 install -r requirements.txt
-    ```
-7. Enter the Tetris directory:
-    ```bash
-    cd Tetris
-    ```
-8. Run the game:
-    ```bash
-    python3 paint.py
-    ```
+[Go to the start](#kvanta)
 
 ## 🪟 Windows
 
@@ -185,6 +135,9 @@ Chose Os and where you gone run game:
     ```cmd
     python paint.py
     ```
+
+[Go to the start](#kvanta)
+
 ### Powershell
 
 2. Clone the repository:
@@ -216,67 +169,35 @@ Chose Os and where you gone run game:
     python paint.py
     ```
 
-## 🍎 macOS
+[Go to the start](#kvanta)
 
-1. Press 
-<kbd>Cmd</kbd> + <kbd>Space</kbd> → wright `Terminal` → <kbd>Enter</kbd>
-### 🐟 Fish shell
-2. Clone the repository:
-    ```bash
-    git clone https://github.com/N1k78/Kvanta.git
-    ```
-3. go to the folder Kvanta:
-    ```bash
-    cd Kvanta
-    ```
-4. Create a virtual environment:
-    ```bash
-    python3 -m venv .Kvanta
-    ```
-5. Activate environment:
-    ```bash
-    source .Kvanta/bin/activate.fish
-    ```
-6. Install packages:
-    ```bash
-    pip3 install -r requirements.txt
-    ```
-7. Enter the Tetris directory:
-    ```bash
-    cd Tetris
-    ```
-8. Run the game:
-    ```bash
-    python3 paint.py
-    ```
-### 🐚 Bash shell
 
-2. Clone the repository:
-    ```bash
-    git clone https://github.com/N1k78/Kvanta.git
-    ```
-3. Go to the Kvanta folder:
-    ```bash
-    cd Kvanta
-    ```
-4. Create a virtual environment:
-    ```bash
-    python3 -m venv .Kvanta
-    ```
-5. Activate environment:
-    ```bash
-    source .Kvanta/bin/activate
-    ```
-6. Install packages:
-    ```bash
-    pip3 install -r requirements.txt
-    ```
-7. Enter the Tetris directory:
-    ```bash
-    cd Tetris
-    ```
-8. Run the game:
-    ```bash
-    python3 paint.py
-    ```
 
+## ***`python`* installation**
+### start
+
+at first you have to:
+- [ ] python version
+```bash
+python --version
+```
+
+- [ ] pip3 version
+```bash
+pip3 --version
+```
+
+- [ ] pip version
+```bash
+pip --version
+```
+
+If you dont have pip or python look down
+
+### python instaletion:
+### 🐧 Linux and 💻 Ubuntu
+- ```bash
+sudo apt update
+```
+- ```bash
+sudo apt install python3 python3-pip -y
