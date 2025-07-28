@@ -83,6 +83,20 @@ def paint_shape(shape,color,x_position,y_position): # намалювати фі�
                 pygame.draw.rect(surface, color, rect)
     screen.blit(surface, (Y, X))
 
+def next_shape(shape,color,x_position,y_position): # намалювати фігуру
+    global surface1
+    global screen
+    rect = pygame.Rect(stor * 4, stor * 2, stor, stor) 
+    pygame.draw.rect(surface1, (0,0,0), rect)
+    
+    screen.blit(surface1, (x_position, y_position))
+    for hight in range(0,len(shape)):
+        for lenght in range(0,len(shape[hight])):
+            if shape[hight][lenght] == 1:
+                rect = pygame.Rect(stor * lenght, stor * hight, stor, stor) 
+                pygame.draw.rect(surface1, color, rect)
+    screen.blit(surface1, (x_position, y_position))
+
 def move(data,dx,dy):
     active_new = active.copy()
     name = data["name"]
@@ -175,34 +189,27 @@ def is_valid_position(tetromino: dict) -> bool:
 
 def clearn_bonus():
     global bouns
-    try:
-        bonus += 1
-        bonus -= 1
-    except:
-        bonus = 0
-    map_now = map.copy()
-    for number, row in enumerate(map_now):
+    for number, row in enumerate(map):
         next_row = [0 for _ in range(0,len(row))]
         if 0 not in row:
-           map_now[number] = next_row
-           print(row not in map_now)
+           map[number] = next_row
+           print(row not in map)
            bonus += 1
            print(bonus)
-    for rous in range(0,len(map_now)):
+    for rous in range(0,len(map)):
         print(map[rous])
-    print(len(map_now))
-    return map_now
-    # map = map_new.copy()
+    print(len(map))
+    return map
+    # map = map.copy()
 
 
 def clear_lines(): 
     """ Перевіряє сітку на наявність заповнених рядків, видаляє їх і зсуває верхні рядки вниз. Повертає кількість очищених рядків для нарахування очок. """ 
     lines_cleared = 0 
     # Ітеруємо знизу вгору, щоб індекси не збивалися при видаленні 
-    map_new = map.copy()
     y = H - 1 
     while y >= 0: 
-        row = map_new[y] 
+        row = map[y] 
     # Якщо в рядку немає порожніх клітинок (None) 
         clear = True
         for cell in row:
@@ -212,13 +219,13 @@ def clear_lines():
         if clear:
             lines_cleared += 1 
             # Видаляємо заповнений рядок 
-            map_new.pop(y) 
+            map.pop(y) 
             # # Додаємо новий порожній рядок нагорі, щоб зберегти висоту поля 
-            map_new.insert(0, [0 for _ in range(L)]) 
+            map.insert(0, [0 for _ in range(L)]) 
         else: 
         # # Якщо рядок не заповнений, переходимо до перевірки наступного (вище) 
             y -= 1 
-        return map_new, lines_cleared
+    return lines_cleared
 
 def pin(tetromino: dict):
     shape_pattern = SHAPES[tetromino['name']]['patterns'][tetromino['rotation']]
@@ -232,7 +239,22 @@ def pin(tetromino: dict):
                 y = int(tetromino['y']) + row_index
                 set_color(x, y, number)
 
-    
+
+def set_text(x,y,text,color = (255,255,255),chrift = 40, senter = False):
+    font = pygame.font.SysFont(None, chrift)
+    score_text = font.render(text, True, color)
+    if senter:
+        rect = score_text.get_rect(center=(x, y))
+    else:
+        rect = (x,y)
+    screen.blit(score_text, rect)
+
+def game_Over():
+    set_text((20*(L+2)+200)//2, (20*(H+2))//2,"Game Over",(255,0,0),75, senter= True)
+    pygame.display.flip()
+    sleep(2)
+    pygame.quit()
+    sys.exit
 
 if __name__ == "__main__":
     stor = 20
@@ -246,7 +268,7 @@ if __name__ == "__main__":
     #     print(map[rous])
 
     pygame.init()
-    screen = pygame.display.set_mode((20*(L+2)+100, 20*(H+2)))
+    screen = pygame.display.set_mode((20*(L+2)+200, 20*(H+2)))
     pygame.display.set_caption('Tetris')
     screen.fill(pygame.Color("black"))
     
@@ -256,6 +278,9 @@ if __name__ == "__main__":
     surface_height = H * stor
     surface = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
     
+    surface1_width = 2 * stor
+    surface1_height = 4 * stor 
+    surface1 = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
     paint_map(screen,map)
     
     sprite = "I"
@@ -263,12 +288,11 @@ if __name__ == "__main__":
     y_position = 3
     # paint_shape(SHAPES[sprite]["patterns"][0],SHAPES[sprite]["color"],x_position,y_position)
 
-    active = spawn_pies()
-    print(active)
-    
+    next_active = spawn_pies()
+    print(next_active)
+    active = next_active
     bonus = 0
     
-    active_new = active.copy()
     clock = pygame.time.Clock()
     DROP_EVENT = pygame.USEREVENT+1
     pygame.time.set_timer(DROP_EVENT,1000)
@@ -286,10 +310,11 @@ if __name__ == "__main__":
                     active = active_new
                 else:
                     pin(active)
-                    active = spawn_pies()
+                    active = next_active
+                    next_active = spawn_pies()
                     if not is_valid_position(active):
                         game_over = True
-                map, lines_cleared = clear_lines()
+                lines_cleared = clear_lines()
                 bonus += lines_cleared
             elif keboard == pygame.KEYDOWN and not game_over:
                 keboard = event.key
@@ -310,11 +335,33 @@ if __name__ == "__main__":
         # pygame.time.set_timer(move(active,0,1), 100) 
         if not game_over:
             paint_map(screen,map)
+            set_text(20*(L+2), 75,f"NEXT:", (255,128,128))
+            next_shape([
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1]
+                ],
+                (0,0,0),
+                20*12,
+                5*20)
+            next_shape(SHAPES[next_active["name"]]["patterns"][0],SHAPES[next_active["name"]]["color"],20*12,5*20)
             paint_shape(SHAPES[active["name"]]["patterns"][active["rotation"]],SHAPES[sprite]["color"],active["x"],active["y"])
+            set_text((20*(L+2)+10), 190,f"SCORE: {bonus}")
             pygame.display.flip()
             # screen.fill(pygame.Color("green"))
+            surface1_width = 2 * stor
+            surface1_height = 4 * stor
+            surface1 = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
             surface_width = L * stor
             surface_height = H * stor
             surface = pygame.Surface((surface_width, surface_height), pygame.SRCALPHA)
+            pygame.display.flip()
+            
         else:
             print(f"bonus {bonus}")
+            game_Over()
