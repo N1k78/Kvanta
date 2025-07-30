@@ -7,8 +7,9 @@ The project and exsesize is in this presentation:
 This is my version of code.
 
 **If you not work with `python` look here**
-- [🐧 Linux](#-linux-python)
-- [💻 Ubuntu](#-ubuntu-python)
+- [Do you have python and pip?](#start)
+- [🐧 Linux](#-linux-and--ubuntu)
+- [💻 Ubuntu](#-linux-and--ubuntu)
 - [🪟 Windows](#-windows-python)
 - [🍎 Macos](#-macos-python)
 
