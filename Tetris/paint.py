@@ -289,7 +289,6 @@ if __name__ == "__main__":
     # paint_shape(SHAPES[sprite]["patterns"][0],SHAPES[sprite]["color"],x_position,y_position)
 
     next_active = spawn_pies()
-    print(next_active)
     active = next_active
     bonus = 0
     

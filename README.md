@@ -7,33 +7,28 @@ The project and exsesize is in this presentation:
 This is my version of code.
 
 at first you have to understand what is wrote so:
-
-__When you do first paragraph after you chose OS do this:__
-
-- on linux, macOS or ubuntu
+## how open folder in editor
+write 
+1. wing-personal
     ```bash
-    pwd
+    wing-personal11
+    ```
+    ![alt text](image.png)
+
+2. VSCode
+    write
+    ```bash
+    code .
     ```
 
-- on Windous
-    ```bash
-    DIR
-    ```
-    
-1. _you have to get:_
+**If you not work with `python` look here**
+- [Do you have python and pip?](#start)
 
-`/home/(your login)/...`
-
-write:
-
-2. 
-```bash
-cd
-```
-3. 
-```bash
-cd Desktop
-```
+if you dont have python or pip look dow:
+- [🐧 Linux](#-linux-and--ubuntu)
+- [💻 Ubuntu](#-linux-and--ubuntu)
+- [🪟 Windows](#-windows-python)
+- [🍎 Macos](#-macos-python)
 
 4. if you dont have directory __`source`__ you have to create:
 
@@ -56,19 +51,8 @@ cd Desktop
     cd source
     ```
 
-
-
-**If you not work with `python` look here**
-- [Do you have python and pip?](#start)
-if you dont have python or pip look dow:
-- [🐧 Linux](#-linux-and--ubuntu)
-- [💻 Ubuntu](#-linux-and--ubuntu)
-- [🪟 Windows](#-windows-python)
-- [🍎 Macos](#-macos-python)
-
-
 To start the "Tetris game" look down:
-Chose Os and where you gone run game:
+### Chose Os and where you gone run game:
 - [🐧 Linux](#-linux)
     - [🐟 fish shell](#-fish-shell)
     - [🐚 bash shell](#-bash-shell)
@@ -90,6 +74,9 @@ Chose Os and where you gone run game:
     - 🍎 macOS
         - <kbd>Cmd</kbd> + <kbd>Space</kbd> → wright `Terminal` → <kbd>Enter</kbd>
 
+__!!!!__
+### [do This](#do-it)
+__!!!!__
 
 ### 🐟 Fish shell
 2. Clone the repository:
@@ -160,6 +147,10 @@ Chose Os and where you gone run game:
 
 1. Open Command Prompt (CMD) or PowerShell
 
+__!!!!__
+### [do This](#do-it)
+__!!!!__
+
 ### Cmd
 2. Clone the repository:
     ```cmd
@@ -193,7 +184,6 @@ Chose Os and where you gone run game:
 [Go to the start](#kvanta)
 
 ### Powershell
-
 2. Clone the repository:
     ```powershell
     git clone https://github.com/N1k78/Kvanta.git
@@ -224,6 +214,32 @@ Chose Os and where you gone run game:
     ```
 
 [Go to the start](#kvanta)
+
+### Do It
+- on linux, macOS or ubuntu
+    ```bash
+    pwd
+    ```
+
+- on Windous
+    ```bash
+    DIR
+    ```
+    
+1. _you have to get:_
+
+`/home/(your login)/...`
+
+write:
+
+2. 
+```bash
+cd
+```
+3. 
+```bash
+cd Desktop
+```
 
 
 
