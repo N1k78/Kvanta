@@ -6,8 +6,61 @@ The project and exsesize is in this presentation:
 
 This is my version of code.
 
+at first you have to understand what is wrote so:
+
+__When you do first paragraph after you chose OS do this:__
+
+- on linux, macOS or ubuntu
+    ```bash
+    pwd
+    ```
+
+- on Windous
+    ```bash
+    DIR
+    ```
+    
+1. _you have to get:_
+
+`/home/(your login)/...`
+
+write:
+
+2. 
+```bash
+cd
+```
+3. 
+```bash
+cd Desktop
+```
+
+4. if you dont have directory __`source`__ you have to create:
+
+- on Linux, macOS or Ubuntu
+    ```bash
+    mkdir source
+    ```
+- on Windous
+    - press:
+
+        🪟 - windous
+
+        <kbd>🪟</kbd> + <kbd>E</kbd>
+        1. open `destop` 
+        2. create folder `source`
+        3. go back to the termenal
+
+5. go to the folder:
+    ``` bash
+    cd source
+    ```
+
+
+
 **If you not work with `python` look here**
 - [Do you have python and pip?](#start)
+if you dont have python or pip look dow:
 - [🐧 Linux](#-linux-and--ubuntu)
 - [💻 Ubuntu](#-linux-and--ubuntu)
 - [🪟 Windows](#-windows-python)
@@ -182,6 +235,11 @@ at first you have to:
 ```bash
 python --version
 ```
+At normal have to be like:
+```
+~/D/s/Kvanta (main)> python -V
+Python 3.12.3
+```
 
 - [ ] pip3 version
 ```bash
@@ -197,8 +255,21 @@ If you dont have pip or python look down
 
 ### python instaletion:
 ### 🐧 Linux and 💻 Ubuntu
-- ```bash
+
+- update
+ ```bash
 sudo apt update
 ```
-- ```bash
-sudo apt install python3 python3-pip -y
+
+
+- Install pip and python
+
+python
+```bash
+sudo apt install python3
+```
+pip
+
+```bash
+sudo apt install python3-pip
+```
