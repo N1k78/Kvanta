@@ -2,7 +2,7 @@
 # code from kvanta camp 2025 in summer
 
 The project and exsesize is in this presentation:
-[click here](https://docs.google.com/presentation/d/1y2nVD5pIWoul3HU0f28udZoJGliT0383ZjXMg_Hnc-I/edit?slide=id.g362ff9ae707_1_23#slide=id.g362ff9ae707_1_23)
+[click here](https://docs.google.com/presentation/d/1y2nVD5pIWoul3HU0f28udZoJGliT0383ZjXMg_Hnc-I/edit?slide=id.p#slide=id.p)
 
 This is my version of code.
 
