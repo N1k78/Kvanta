@@ -6,20 +6,6 @@ The project and exsesize is in this presentation:
 
 This is my version of code.
 
-at first you have to understand what is wrote so:
-## how open folder in editor
-write 
-1. wing-personal
-    ```bash
-    wing-personal11
-    ```
-    ![alt text](image.png)
-
-2. VSCode
-    write
-    ```bash
-    code .
-    ```
 
 **If you not work with `python` look here**
 - [Do you have python and pip?](#start)
@@ -27,29 +13,10 @@ write
 if you dont have python or pip look dow:
 - [🐧 Linux](#-linux-and--ubuntu)
 - [💻 Ubuntu](#-linux-and--ubuntu)
-- [🪟 Windows](#-windows-python)
-- [🍎 Macos](#-macos-python)
-
-4. if you dont have directory __`source`__ you have to create:
-
-- on Linux, macOS or Ubuntu
-    ```bash
-    mkdir source
-    ```
-- on Windous
-    - press:
-
-        🪟 - windous
-
-        <kbd>🪟</kbd> + <kbd>E</kbd>
-        1. open `destop` 
-        2. create folder `source`
-        3. go back to the termenal
-
-5. go to the folder:
-    ``` bash
-    cd source
-    ```
+- if you have:
+    - macOS
+    - Windous
+    you can only [look here](#how-open-folder-in-editor)
 
 To start the "Tetris game" look down:
 ### Chose Os and where you gone run game:
@@ -241,7 +208,28 @@ cd
 cd Desktop
 ```
 
+4. if you dont have directory __`source`__ you have to create:
 
+- on Linux, macOS or Ubuntu
+    ```bash
+    mkdir source
+    ```
+- on Windous
+    - press:
+
+        🪟 - windous
+
+        <kbd>🪟</kbd> + <kbd>E</kbd>
+        1. open `destop` 
+        2. create folder `source`
+        3. go back to the termenal
+
+5. go to the folder:
+    ``` bash
+    cd source
+    ```
+
+[Go to the start](#kvanta)
 
 ## ***`python`* installation**
 ### start
@@ -267,6 +255,8 @@ pip3 --version
 pip --version
 ```
 
+[Go to the start](#kvanta)
+
 If you dont have pip or python look down
 
 ### python instaletion:
@@ -289,3 +279,21 @@ pip
 ```bash
 sudo apt install python3-pip
 ```
+[Go to the start](#kvanta)
+
+## how open folder in editor
+write 
+1. wing-personal
+    ```bash
+    wing-personal11
+    ```
+    ![alt text](image.png)
+
+2. VSCode
+    write
+    ```bash
+    code .
+    ```
+
+and open file `paint.py` and pres `run`
+[Go to the start](#kvanta)
